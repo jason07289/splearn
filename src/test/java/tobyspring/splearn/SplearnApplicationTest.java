@@ -8,11 +8,11 @@ import org.springframework.boot.SpringApplication;
 class SplearnApplicationTest {
     @Test
     void run() {
-        MockedStatic<SpringApplication> mocked = Mockito.mockStatic(SpringApplication.class);
+        try(MockedStatic<SpringApplication> mocked = Mockito.mockStatic(SpringApplication.class)) {
+            SplearnApplication.main(new String[0]);
 
-        SplearnApplication.main(new String[0]);
-
-        mocked.verify(() -> SpringApplication.run(SplearnApplication.class, new String[0]));
+            mocked.verify(() -> SpringApplication.run(SplearnApplication.class, new String[0]));
+        }
     }
 
 }
