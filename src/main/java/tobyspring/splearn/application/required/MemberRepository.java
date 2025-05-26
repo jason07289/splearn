@@ -4,7 +4,6 @@ import org.springframework.data.repository.Repository;
 import tobyspring.splearn.domain.Email;
 import tobyspring.splearn.domain.Member;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 /**
