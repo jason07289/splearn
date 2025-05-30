@@ -8,7 +8,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import tobyspring.splearn.domain.member.Member;
 import tobyspring.splearn.domain.member.MemberStatus;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static tobyspring.splearn.domain.member.MemberFixture.createMemberRegisterRequest;
