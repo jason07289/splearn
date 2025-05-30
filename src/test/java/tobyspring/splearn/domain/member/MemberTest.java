@@ -70,15 +70,6 @@ class MemberTest {
     }
 
     @Test
-    void changeNickname() {
-        assertThat(member.getNickname()).isEqualTo("Charlie");
-
-        member.changeNickname("Charlie2");
-
-        assertThat(member.getNickname()).isEqualTo("Charlie2");
-    }
-
-    @Test
     void changePassword() {
         member.changePassword("verysecret2", passwordEncoder);
 
@@ -87,21 +78,21 @@ class MemberTest {
 
     @Test
     void isActive() {
-         assertThat(member.isActive()).isFalse();
+        assertThat(member.isActive()).isFalse();
 
-         member.activate();
+        member.activate();
 
-         assertThat(member.isActive()).isTrue();
+        assertThat(member.isActive()).isTrue();
 
-         member.deactivate();
+        member.deactivate();
 
-         assertThat(member.isActive()).isFalse();
+        assertThat(member.isActive()).isFalse();
     }
 
     @Test
     void invalidEmail() {
         assertThatThrownBy(() ->
-            Member.register(createMemberRegisterRequest("invalid email"), passwordEncoder)
+                Member.register(createMemberRegisterRequest("invalid email"), passwordEncoder)
         ).isInstanceOf(IllegalArgumentException.class);
 
         Member.register(createMemberRegisterRequest(), passwordEncoder);
@@ -117,6 +108,14 @@ class MemberTest {
         assertThat(member.getNickname()).isEqualTo(request.nickname());
         assertThat(member.getDetail().getProfile().address()).isEqualTo(request.profileAddress());
         assertThat(member.getDetail().getIntroduction()).isEqualTo(request.introduction());
+    }
+
+    @Test
+    void updateInfoFail() {
+        assertThatThrownBy(() -> {
+            var request = new MemberInfoUpdateRequest("Leo", "toby100", "자기소개");
+            member.updateInfo(request);
+        }).isInstanceOf(IllegalStateException.class);
     }
 
 }
