@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.NaturalIdCache;
 import tobyspring.splearn.domain.AbstractEntity;
 import tobyspring.splearn.domain.shared.Email;
 
@@ -18,6 +19,7 @@ import static org.springframework.util.Assert.state;
 @Getter
 @ToString(callSuper = true, exclude = "detail")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NaturalIdCache //NaturalId도 영속성 캐시 활성화 할 수 있음.
 public class Member extends AbstractEntity {
     @NaturalId
     private Email email;
