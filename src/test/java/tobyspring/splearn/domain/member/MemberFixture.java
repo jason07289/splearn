@@ -2,6 +2,9 @@ package tobyspring.splearn.domain.member;
 
 import org.springframework.test.util.ReflectionTestUtils;
 
+/**
+ * 테스트용 utility 클래스입니다.
+ */
 public class MemberFixture {
     public static MemberRegisterRequest createMemberRegisterRequest(String email) {
         return new MemberRegisterRequest(email, "Charlie", "verysecret");

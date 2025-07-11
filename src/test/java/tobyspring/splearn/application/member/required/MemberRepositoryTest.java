@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static tobyspring.splearn.domain.member.MemberFixture.createMemberRegisterRequest;
 import static tobyspring.splearn.domain.member.MemberFixture.createPasswordEncoder;
 
-@DataJpaTest
+@DataJpaTest//h2-db로 동작
 class MemberRepositoryTest {
     @Autowired
     MemberRepository memberRepository;

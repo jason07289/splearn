@@ -9,7 +9,7 @@ import tobyspring.splearn.domain.member.MemberRegisterRequest;
  * 회원의 등록과 관련된 기능을 제공한다
  */
 public interface MemberRegister {
-    Member register(@Valid MemberRegisterRequest registerRequest);
+    Member register(@Valid MemberRegisterRequest registerRequest);//TODO 엔티티를 컨트롤러로 리턴??
 
     Member activate(Long memberId);
 

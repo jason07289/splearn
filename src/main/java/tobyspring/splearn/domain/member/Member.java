@@ -26,6 +26,7 @@ public class Member extends AbstractEntity {
 
     private String passwordHash;
 
+
     private MemberStatus status;
 
     private MemberDetail detail;
@@ -77,4 +78,5 @@ public class Member extends AbstractEntity {
     public boolean isActive() {
         return this.status == MemberStatus.ACTIVE;
     }
+
 }

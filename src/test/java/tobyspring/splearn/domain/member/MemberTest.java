@@ -10,6 +10,7 @@ import static tobyspring.splearn.domain.member.MemberFixture.createPasswordEncod
 
 class MemberTest {
     Member member;
+
     PasswordEncoder passwordEncoder;
 
     @BeforeEach
