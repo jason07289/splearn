@@ -4,13 +4,19 @@ import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import tobyspring.splearn.SplearnTestConfiguration;
+import tobyspring.splearn.adapter.security.SecurePasswordEncoder;
+import tobyspring.splearn.application.member.MemberModifyService;
+import tobyspring.splearn.application.member.required.EmailSender;
+import tobyspring.splearn.application.member.required.MemberRepository;
 import tobyspring.splearn.domain.member.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.*;
 
 @SpringBootTest
 @Transactional
@@ -24,6 +30,24 @@ record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityMan
         assertThat(member.getId()).isNotNull();
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
     }
+
+//    @Test
+//    void registerMockitoTest() {
+//        MemberRepository memberRepositoryMock = Mockito.mock(MemberRepository.class);
+//        EmailSender emailSenderMock = Mockito.mock(EmailSender.class);
+//        MemberRegister register = new MemberModifyService(
+//                Mockito.mock(MemberFinder.class),
+//                memberRepositoryMock,
+//                emailSenderMock,
+//                new SecurePasswordEncoder()
+//        );
+//
+//        Member member = register.register(MemberFixture.createMemberRegisterRequest());
+//
+//        Mockito.verify(memberRepositoryMock).save(eq(member));
+//        Mockito.verify(emailSenderMock).send(eq(member.getEmail()), any(),any());
+//
+//    }
 
     @Test
     void duplicateEmailFail() {

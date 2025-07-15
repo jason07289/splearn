@@ -14,7 +14,7 @@ import tobyspring.splearn.domain.shared.Email;
 @Service
 @Transactional
 @Validated
-@RequiredArgsConstructor
+@RequiredArgsConstructor//intellij delombok 있음
 public class MemberModifyService implements MemberRegister {
     private final MemberFinder memberFinder;
     private final MemberRepository memberRepository;
