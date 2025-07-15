@@ -31,23 +31,23 @@ record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityMan
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
     }
 
-//    @Test
-//    void registerMockitoTest() {
-//        MemberRepository memberRepositoryMock = Mockito.mock(MemberRepository.class);
-//        EmailSender emailSenderMock = Mockito.mock(EmailSender.class);
-//        MemberRegister register = new MemberModifyService(
-//                Mockito.mock(MemberFinder.class),
-//                memberRepositoryMock,
-//                emailSenderMock,
-//                new SecurePasswordEncoder()
-//        );
-//
-//        Member member = register.register(MemberFixture.createMemberRegisterRequest());
-//
-//        Mockito.verify(memberRepositoryMock).save(eq(member));
-//        Mockito.verify(emailSenderMock).send(eq(member.getEmail()), any(),any());
-//
-//    }
+    @Test
+    void registerMockitoTest() {
+        MemberRepository memberRepositoryMock = Mockito.mock(MemberRepository.class);
+        EmailSender emailSenderMock = Mockito.mock(EmailSender.class);
+        MemberRegister register = new MemberModifyService(
+                Mockito.mock(MemberFinder.class),
+                memberRepositoryMock,
+                emailSenderMock,
+                new SecurePasswordEncoder()
+        );
+
+        Member member = register.register(MemberFixture.createMemberRegisterRequest());
+
+        Mockito.verify(memberRepositoryMock).save(eq(member));
+        Mockito.verify(emailSenderMock).send(eq(member.getEmail()), any(),any());
+
+    }
 
     @Test
     void duplicateEmailFail() {
