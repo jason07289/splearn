@@ -21,7 +21,7 @@ public class MemberModifyService implements MemberRegister {
     private final EmailSender emailSender;
     private final PasswordEncoder passwordEncoder;
 
-    @Override
+    @Override//application 최상단 public 메서드는 특히 가독성이 중요하다. checkDuplicateEmail, sendWelcomeEmail 등의 로직은 함수화함
     public Member register(MemberRegisterRequest registerRequest) {
         checkDuplicateEmail(registerRequest);
 

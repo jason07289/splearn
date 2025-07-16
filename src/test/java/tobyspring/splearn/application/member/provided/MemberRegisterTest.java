@@ -31,7 +31,7 @@ record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityMan
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
     }
 
-    @Test
+    @Test//spring이랑은 관련없이 할 경우
     void registerMockitoTest() {
         MemberRepository memberRepositoryMock = Mockito.mock(MemberRepository.class);
         EmailSender emailSenderMock = Mockito.mock(EmailSender.class);
