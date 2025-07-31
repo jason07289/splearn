@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.NaturalIdCache;
 import tobyspring.splearn.domain.AbstractEntity;
 import tobyspring.splearn.domain.shared.Email;
 
@@ -30,7 +29,7 @@ public class Member extends AbstractEntity {
 
 
     private MemberStatus status;
-
+    //MemberDetail의 변경은 루트를 통해서만 일어나야한다.
     private MemberDetail detail;
 
     public static Member register(MemberRegisterRequest createRequest, PasswordEncoder passwordEncoder) {
@@ -42,6 +41,9 @@ public class Member extends AbstractEntity {
 
         member.status = MemberStatus.PENDING;
 
+        // MemberDetail은 Member와 긴밀한 관계를 가지고 있다. -> 생성될 때 항상 생성됨
+        // Member와 MemberDetail은 Member Aggregate를 구성한다.
+        // Member는 Aggregate Root로서 MemberDetail을 관리한다.
         member.detail = MemberDetail.create();
 
         return member;

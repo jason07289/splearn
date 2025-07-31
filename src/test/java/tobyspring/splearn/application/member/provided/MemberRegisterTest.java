@@ -16,11 +16,13 @@ import tobyspring.splearn.domain.member.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 
 @SpringBootTest
-@Transactional
+@Transactional//테스트에서 이걸 쓰면 메서드 별로 롤백해줌 테스트 멱등성보장해줄듯
 @Import(SplearnTestConfiguration.class)
+//@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)//MemberRegister 찾아줌, junit-platform.properties 확인
 record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityManager) {
 
     @Test
