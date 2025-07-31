@@ -39,6 +39,7 @@ class MemberApiTest {
     @Test
     void register() throws JsonProcessingException, UnsupportedEncodingException {
         MemberRegisterRequest request = MemberFixture.createMemberRegisterRequest();
+        //http 요청을 보낼때 쓴느 body라 생각해야할듯.
         String requestJson = objectMapper.writeValueAsString(request);
 
         MvcTestResult result = mvcTester.post().uri("/api/members").contentType(MediaType.APPLICATION_JSON)
@@ -50,10 +51,14 @@ class MemberApiTest {
                 .hasPathSatisfying("$.memberId", notNull())
                 .hasPathSatisfying("$.email", equalsTo(request));
 
+        //objectMapper.readValue를 통해서 result(mvc테스트결과)를 MemberRegisterResponse에 담는다.
         MemberRegisterResponse response =
                 objectMapper.readValue(result.getResponse().getContentAsString(), MemberRegisterResponse.class);
+
+        //실제 레포지토리에서 조회한다.
         Member member = memberRepository.findById(response.memberId()).orElseThrow();
 
+        //결과를 비교해본다.
         assertThat(member.getEmail().address()).isEqualTo(request.email());
         assertThat(member.getNickname()).isEqualTo(request.nickname());
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
@@ -61,8 +66,10 @@ class MemberApiTest {
 
     @Test
     void duplicateEmail() throws JsonProcessingException {
+        //서비스에서 바로 저장해봄
         memberRegister.register(MemberFixture.createMemberRegisterRequest());
 
+        //같은 이메일을 가지는 요청객체 생성
         MemberRegisterRequest request = MemberFixture.createMemberRegisterRequest();
         String requestJson = objectMapper.writeValueAsString(request);
 
