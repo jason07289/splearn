@@ -26,9 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static tobyspring.splearn.AssertThatUtils.equalsTo;
 import static tobyspring.splearn.AssertThatUtils.notNull;
 
-@SpringBootTest
+@SpringBootTest//통테
 @AutoConfigureMockMvc
-@Transactional
+@Transactional//required_new와 같이 내부에서 새로운 트랜잭션을 생성하는 경우, 다른 쓰레드를 사용해서 트랜잭션 작업을 할 경우엔 롤백이 안된다.
 @RequiredArgsConstructor
 class MemberApiTest {
     final MockMvcTester mvcTester;
